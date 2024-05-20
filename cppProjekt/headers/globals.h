@@ -55,7 +55,7 @@ extern bool isGameStarted;
  */
 extern unsigned int resolutionChoice;
 
-/// @brief struktura zawierająca zmienne umożliwiające animacje blocków.
+/// @brief Klasa zawierająca zmienne umożliwiające animacje blocków.
 class TilePos {
 public:
     int iDest;
@@ -70,7 +70,7 @@ public:
 extern TilePos animationPos[GRID_SIZE][GRID_SIZE];
 
 /**
- * @brief Struktura odpowiadająca za zmiane ustawień gry.
+ * @brief Klasa odpowiadająca za zmiane ustawień gry.
  * Potrafi zmienić rozdzielczość, włączyć lub wyłączyć tryb pełnoekranowy, włączyć tryb Infinite,
  * zmienić rozmiar siatki. 
  * */
@@ -88,7 +88,7 @@ public:
 };
 extern Options Settings;
 
-/// @brief Struktura przechowywująca możliwe rozdzielczości gry.
+/// @brief Klasa przechowywująca możliwe rozdzielczości gry.
 class Resolution {
 public:
     int width;
