@@ -1,6 +1,7 @@
 #include "globals.h"
 
-int grid[GRID_SIZE][GRID_SIZE];
+//int grid[GRID_SIZE][GRID_SIZE];
+int** grid = new int*[GRID_SIZE];
 
 int emptySpaces;
 
@@ -18,7 +19,8 @@ bool isGameStarted;
 
 unsigned int resolutionChoice;
 
-TilePos animationPos[GRID_SIZE][GRID_SIZE];
+//TilePos animationPos[GRID_SIZE][GRID_SIZE];
+TilePos **animationPos = new TilePos*[GRID_SIZE];
 
 Options Settings(800, 600, false);
 
@@ -31,3 +33,17 @@ Resolution resolutions[7] = {
     {1600, 900},
     {1920, 1080}
 };
+
+void create()
+{
+    for (int i = 0; i < GRID_SIZE; ++i) {
+        grid[i] = new int[GRID_SIZE];
+    }
+}
+
+void createAnimations()
+{
+    for (int i = 0; i < GRID_SIZE; ++i) {
+        animationPos[i] = new TilePos[GRID_SIZE];
+    }
+}

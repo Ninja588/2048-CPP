@@ -7,6 +7,7 @@
 #define SCORE_H
 
 #include <iostream>
+#include <fstream>
 #include "score.cpp"
 
 using namespace std;

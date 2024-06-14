@@ -16,7 +16,9 @@
  * Dwuwymiarowa tablica przechowująca stan gry.
  * Wartości w siatce mogą być 0 (reprezentują puste miejsce) lub potęgi liczby 2 (2, 4, 8, 16, itd.).
  */
-extern int grid[GRID_SIZE][GRID_SIZE]; // siatka
+//extern int grid[GRID_SIZE][GRID_SIZE]; // siatka
+
+extern int** grid;
 
 /**
  * @brief Liczba pustych miejsc na siatce gry.
@@ -67,7 +69,8 @@ public:
 
     TilePos() : iDest(-1), jDest(-1), iCurrentCoords(0), jCurrentCoords(0), destValue(0), sourceValue(0) {}
 };
-extern TilePos animationPos[GRID_SIZE][GRID_SIZE];
+//extern TilePos animationPos[GRID_SIZE][GRID_SIZE];
+extern TilePos **animationPos;
 
 /**
  * @brief Klasa odpowiadająca za zmiane ustawień gry.
@@ -95,5 +98,9 @@ public:
     int height;
 };
 extern Resolution resolutions[7];
+
+extern void create();
+
+extern void createAnimations();
 
 #endif // GLOBALS_H

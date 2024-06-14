@@ -12,7 +12,7 @@
  * Wartość ta kontroluje wielkość siatki gry, która jest kwadratowa.
  * Zwiększenie tej wartości zwiększy liczbę pól na siatce gry.
  */
-#define GRID_SIZE 4
+int GRID_SIZE = 4;
 /**
  * @brief Szybkość poruszania sie bloków.
  * Określa Szybkość poruszania sie bloków w grze.

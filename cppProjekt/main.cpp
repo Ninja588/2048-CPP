@@ -242,6 +242,7 @@ switch(value) {
  * a następnie generuje dwa losowe tile'y na siatce.
  */
 void initializeGrid() {
+    //create();
     for (int i = 0; i < GRID_SIZE; i++) {
         for (int j = 0; j < GRID_SIZE; j++) {
             grid[i][j] = 0;
@@ -530,6 +531,7 @@ void display3() {
     glClear(GL_COLOR_BUFFER_BIT);
     GLuint texture;
     static char temp[10], temp2[10];
+
     //texture = LoadTexture("textures/settings.bmp");
 
     if(!Settings.fullscreen && !Settings.infiniteMode) {
@@ -608,10 +610,25 @@ void handleKeyPress(int key, int x, int y) {
                 break;
         }
     }
+    printf("klawisz: ", key);
+}
+
+void keys(int key, int x, int y) {
+    switch (key) {
+        case GLUT_KEY_F2:
+            GRID_SIZE = 8;
+            tileSize = 800/GRID_SIZE;
+            break;
+        case GLUT_KEY_F3:
+            GRID_SIZE = 4;
+            tileSize = 800/GRID_SIZE;
+            break;
+    }
 }
 
 void mouseMenu(int button, int state, int x, int y) {
     static bool m;
+    glutSpecialFunc(keys);
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         // start
         if (x >= ((Settings.resolutionWidth)/2)-(Settings.resolutionWidth)/10 && x <= ((Settings.resolutionWidth)/2)+(Settings.resolutionWidth)/10 
@@ -619,6 +636,8 @@ void mouseMenu(int button, int state, int x, int y) {
                 && y <= ((Settings.resolutionHeight)-(Settings.resolutionWidth/20)-2*(Settings.resolutionHeight/10)-2*(Settings.resolutionWidth/40))) {
             isGameStarted = true;
             m=false;
+            createAnimations();
+            create();
             srand(time(NULL));
             resetanimationPos();
             initializeGrid();
@@ -736,6 +755,7 @@ void mouseSettings(int button, int state, int x, int y) {
             file.close();
         }
     }
+    cout<<"\nx: "<<x<<"\ny: "<<y;
 }
 
 void mouseGame(int button, int state, int x, int y) {

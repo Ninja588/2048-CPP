@@ -27,6 +27,7 @@ void generateNewTile() {
 }
 
 void resetanimationPos() {
+    createAnimations();
     for(int i=0;i<GRID_SIZE;i++) {
         for(int j=0;j<GRID_SIZE;j++) {
             animationPos[i][j].jDest=-1;
