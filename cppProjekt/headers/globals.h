@@ -16,9 +16,17 @@
  * Dwuwymiarowa tablica przechowująca stan gry.
  * Wartości w siatce mogą być 0 (reprezentują puste miejsce) lub potęgi liczby 2 (2, 4, 8, 16, itd.).
  */
-//extern int grid[GRID_SIZE][GRID_SIZE]; // siatka
-
 extern int** grid;
+
+unsigned int gridsizeChoice = 4;
+
+/**
+ * @brief Rozmiar siatki gry.
+ * Określa liczbę wierszy i kolumn w siatce gry.
+ * Wartość ta kontroluje wielkość siatki gry, która jest kwadratowa.
+ * Zwiększenie tej wartości zwiększy liczbę pól na siatce gry.
+ */
+int GRID_SIZE = 4;
 
 /**
  * @brief Liczba pustych miejsc na siatce gry.
@@ -69,7 +77,6 @@ public:
 
     TilePos() : iDest(-1), jDest(-1), iCurrentCoords(0), jCurrentCoords(0), destValue(0), sourceValue(0) {}
 };
-//extern TilePos animationPos[GRID_SIZE][GRID_SIZE];
 extern TilePos **animationPos;
 
 /**

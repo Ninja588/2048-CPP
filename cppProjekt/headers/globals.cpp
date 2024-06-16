@@ -1,6 +1,5 @@
 #include "globals.h"
 
-//int grid[GRID_SIZE][GRID_SIZE];
 int** grid = new int*[GRID_SIZE];
 
 int emptySpaces;
@@ -19,7 +18,6 @@ bool isGameStarted;
 
 unsigned int resolutionChoice;
 
-//TilePos animationPos[GRID_SIZE][GRID_SIZE];
 TilePos **animationPos = new TilePos*[GRID_SIZE];
 
 Options Settings(800, 600, false);

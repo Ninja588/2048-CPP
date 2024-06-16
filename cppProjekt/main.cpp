@@ -530,7 +530,7 @@ void display2() {
 void display3() {
     glClear(GL_COLOR_BUFFER_BIT);
     GLuint texture;
-    static char temp[10], temp2[10];
+    static char temp[10], temp2[10], temp3[10], temp4[10];
 
     //texture = LoadTexture("textures/settings.bmp");
 
@@ -582,6 +582,15 @@ void display3() {
 
     drawBitmapString(temp,633.6/Settings.resolutionWidth,583.2/Settings.resolutionHeight);
 
+    memset(temp3,0,strlen(temp3));
+
+    itoa(gridsizeChoice,temp4,10);
+    strcat(temp3,temp4);
+    strcat(temp3,"x");
+    strcat(temp3,temp4);
+
+    drawBitmapString(temp3,1123.0/Settings.resolutionWidth,2227.0/Settings.resolutionHeight);
+
     glutSwapBuffers();
 }
 
@@ -610,25 +619,10 @@ void handleKeyPress(int key, int x, int y) {
                 break;
         }
     }
-    printf("klawisz: ", key);
-}
-
-void keys(int key, int x, int y) {
-    switch (key) {
-        case GLUT_KEY_F2:
-            GRID_SIZE = 8;
-            tileSize = 800/GRID_SIZE;
-            break;
-        case GLUT_KEY_F3:
-            GRID_SIZE = 4;
-            tileSize = 800/GRID_SIZE;
-            break;
-    }
 }
 
 void mouseMenu(int button, int state, int x, int y) {
     static bool m;
-    glutSpecialFunc(keys);
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         // start
         if (x >= ((Settings.resolutionWidth)/2)-(Settings.resolutionWidth)/10 && x <= ((Settings.resolutionWidth)/2)+(Settings.resolutionWidth)/10 
@@ -674,6 +668,7 @@ void mouseSettings(int button, int state, int x, int y) {
     static int choiceCheck = 0;
     static bool fullscreenCheck = true;
     static bool infiniteCheck = false;
+    static int gridsizeCheck = 4;
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         // back do menu
         if(x>=Settings.resolutionWidth*0.833 && x<=Settings.resolutionWidth*0.931 
@@ -681,6 +676,9 @@ void mouseSettings(int button, int state, int x, int y) {
             resolutionChoice=choiceCheck;
             Settings.fullscreen = fullscreenCheck;
             Settings.infiniteMode = infiniteCheck;
+            GRID_SIZE = gridsizeCheck;
+            tileSize = 800/GRID_SIZE;
+            gridsizeChoice = gridsizeCheck;
             glutDisplayFunc(display2);
             glutMouseFunc(mouseMenu);
         }
@@ -693,6 +691,12 @@ void mouseSettings(int button, int state, int x, int y) {
                 Settings.resolutionHeight=resolutions[resolutionChoice].height;
                 glutReshapeWindow(Settings.resolutionWidth, Settings.resolutionHeight);
                 choiceCheck=resolutionChoice;
+            }
+            if(gridsizeChoice != gridsizeCheck) 
+            {
+                GRID_SIZE = gridsizeChoice;
+                tileSize = 800/GRID_SIZE;
+                gridsizeCheck = gridsizeChoice;
             }
             if(resolutionChoice!=choiceCheck && Settings.fullscreen) {resolutionChoice=0;}
             if(Settings.fullscreen && Settings.fullscreen!=fullscreenCheck) {
@@ -743,6 +747,19 @@ void mouseSettings(int button, int state, int x, int y) {
             if(Settings.infiniteMode) { Settings.infiniteMode = false; }
             else { Settings.infiniteMode = true; }
         }
+
+
+        if(x>=Settings.resolutionWidth*0.077 && x<=Settings.resolutionWidth*0.106 
+        && y>Settings.resolutionHeight*0.67 && y<=Settings.resolutionHeight*0.7369)
+        {
+            gridsizeChoice = 4;
+        }
+        if(x>=Settings.resolutionWidth*0.338 && x<=Settings.resolutionWidth*0.368 
+        && y>Settings.resolutionHeight*0.67 && y<=Settings.resolutionHeight*0.7369)
+        {
+            gridsizeChoice = 8;
+        }
+
         // highscore reset
         ofstream file("scoreboard.mp3");
         if (file.is_open()) {
@@ -755,7 +772,7 @@ void mouseSettings(int button, int state, int x, int y) {
             file.close();
         }
     }
-    cout<<"\nx: "<<x<<"\ny: "<<y;
+    //cout<<"\nx: "<<x<<"\ny: "<<y;
 }
 
 void mouseGame(int button, int state, int x, int y) {
@@ -808,5 +825,6 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display2);
     glutMouseFunc(mouseMenu);
     glutMainLoop();
+    
     return 0;
 }
